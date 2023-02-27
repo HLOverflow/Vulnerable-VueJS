@@ -1,0 +1,41 @@
+<html>
+<head>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+
+</head>
+<body>
+
+	<!--
+		PoC: 
+		./vue-openredirect2.html?returnUrl=http://example.com
+		./vue-openredirect2.html?returnUrl=javascript:alert(1)
+	-->
+
+	<div id="app">
+		<!-- colon means the same thing as v-bind -->
+		<a :href="returnUrl" >Visit Link</a> 
+	</div>
+	
+	<script>
+		var app = new Vue({
+			el: "#app",
+			data: {
+				returnUrl: "./home"
+			},
+			created() {
+				// getting from URL parameter.
+				let uri = window.location.search.substring(1); 
+				let params = new URLSearchParams(uri);
+				u = params.get("returnUrl");
+				
+				if(u){
+					console.log("returnUrl: " + u);
+					this.$data.returnUrl = u;
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>

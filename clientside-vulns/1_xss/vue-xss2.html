@@ -1,0 +1,31 @@
+<html>
+<head>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+
+</head>
+<body>
+	
+	<!-- 
+		PoC: Type <h1>a</h1> into the input field.
+	-->
+
+	<div id="app">
+		<!-- data-binding (input) -->
+		<input v-model="userinput" />
+		
+		<!-- data-binding (output) -->
+		<p>user input: <a v-html="userinput"></a></p>
+	</div>
+	
+	<script>
+		var app = new Vue({
+			el: "#app",
+			data: {
+				userinput: "default"
+			}
+		})
+	</script>
+	
+</body>
+</html>

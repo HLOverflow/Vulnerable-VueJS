@@ -1,0 +1,44 @@
+<html>
+<head>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+	<script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+
+</head>
+<body>
+
+	<!-- 
+		You may need to reload/refresh your page or open in a new tab.
+		PoC: ./vue-xss3b.html#/?name=<h1>a</h1>
+		
+	-->
+
+	<div id="app">
+		<p>user input: <a v-html=userinput></a></p>
+		
+	</div>
+	
+	<script>	
+	const router = new VueRouter({});
+	var app = new Vue({
+			el: "#app",
+			router,
+			data: {
+				userinput: "default",
+			},
+			created() {
+			
+				let q = this.$route.query;				//different way to GET via vue-router3
+				
+				console.log("name: "+ q.name);	
+				if(q.name){
+					console.log("name: "+ q.name);
+					this.$data.userinput = q.name;
+				}
+			},
+	});
+	
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+
+</head>
+<body>
+	
+	<!--
+		PoC: ./vue-csti2.html?name={{7*7}}
+		
+		The following will not work due to .innerText
+		Failed PoC: ./vue-csti2.html?name=<h1>a</h1>
+	-->
+
+	<div id="app">
+		<p>user input: <a id="a1">default</a></p>
+		
+	</div>
+	
+	<script>	
+	var app = new Vue({
+			el: "#app",
+			created() {
+			
+				// getting from URL parameter.
+				let uri = window.location.search.substring(1); 
+				let params = new URLSearchParams(uri);
+				n = params.get("name");
+				
+				if(n){
+					console.log("name: " + n);
+					document.getElementById("a1").innerText = n;
+				}
+			},
+	});
+	
+	</script>
+	
+</body>
+</html>
