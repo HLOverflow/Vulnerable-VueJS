@@ -11,7 +11,7 @@ All the PoCs documented here only require a browser.
 4. Style Injection
 
 # Server-side Vulnerabilities
-(TODO)
+Oops! VueJS is client-side front end language! 
 
 # References:
 - https://medium.com/@isaacwangethi30/vue-js-security-6e246a7613da
